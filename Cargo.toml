@@ -1,0 +1,11 @@
+[package]
+name = "nvidia-video-codec"
+version = "0.1.0"
+authors = ["Luca Barbato <lu_zero@gentoo.org>"]
+
+build = "build.rs"
+
+[build-dependencies.libbindgen]
+git = "https://github.com/servo/rust-bindgen"
+
+[dependencies]

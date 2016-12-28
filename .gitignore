@@ -4,4 +4,8 @@
 
 # Remove Cargo.lock from gitignore if creating an executable, leave it for libraries
 # More information here http://doc.crates.io/guide.html#cargotoml-vs-cargolock
+target
 Cargo.lock
+src/ffi/cuda.rs
+src/ffi/cuvid.rs
+src/ffi/nvenc.rs
