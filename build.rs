@@ -1,9 +1,9 @@
 extern crate libbindgen;
 
-// use std::env;
-use std::path::Path;
+use std::env;
 use std::fs::OpenOptions;
 use std::io::Write;
+use std::path::PathBuf;
 
 fn format_write(builder: libbindgen::Builder, output: &str) {
     let s = builder.generate()
@@ -30,11 +30,17 @@ fn common_builder() -> libbindgen::Builder {
         .raw_line("#![allow(non_upper_case_globals)]")
 }
 
+fn find_dir(default: &'static str, env_key: &'static str) -> PathBuf {
+    match env::var_os(env_key) {
+        Some(val) => PathBuf::from(&val),
+        _ => PathBuf::from(default),
+    }
+}
+
 fn main() {
-    //    let out_dir = env::var("OUT_DIR").unwrap();
-    // TODO make them params and try to figure them out as default
-    let cuda_include = "/opt/cuda/include";
-    let nvc_include = "/opt/nvidia-video-codec/";
+    let cuda_include = find_dir("/opt/cuda/include", "CUDA_INCLUDE_PATH");
+    let nvc_include = find_dir("/opt/nvidia-video-codec/",
+                               "NVIDIA_VIDEO_CODEC_INCLUDE_PATH");
 
     // TODO support windows
     println!("cargo:rustc-link-lib=dylib={}", "cuda");
@@ -43,39 +49,22 @@ fn main() {
 
 
     let cuda_builder = common_builder()
-        .clang_arg(format!("-I{}", cuda_include))
-        .header(Path::new(cuda_include).join("cuda.h").to_str().unwrap());
+        .clang_arg(format!("-I{}", cuda_include.to_string_lossy()))
+        .header(cuda_include.join("cuda.h").to_string_lossy());
 
     // Manually fix the comment so rustdoc won't try to pick them
     format_write(cuda_builder, "src/ffi/cuda.rs");
 
     let cuvid_builder = common_builder()
-        .clang_arg(format!("-I{}", nvc_include))
-        .clang_arg(format!("-I{}", cuda_include))
-        .header(Path::new(nvc_include).join("nvcuvid.h").to_str().unwrap());
-
-    println!("{:?}", cuvid_builder);
+        .clang_arg(format!("-I{}", nvc_include.to_string_lossy()))
+        .clang_arg(format!("-I{}", cuda_include.to_string_lossy()))
+        .header(nvc_include.join("nvcuvid.h").to_string_lossy());
 
     format_write(cuvid_builder, "src/ffi/cuvid.rs");
 
     let nvenc_builder = common_builder()
-        .clang_arg(format!("-I{}", nvc_include))
-        .header(Path::new(nvc_include).join("nvEncodeAPI.h").to_str().unwrap());
+        .clang_arg(format!("-I{}", nvc_include.to_string_lossy()))
+        .header(nvc_include.join("nvEncodeAPI.h").to_string_lossy());
 
     format_write(nvenc_builder, "src/ffi/nvenc.rs");
 }
-
-// let s = cuda_gen.generate()
-// .unwrap()
-// .to_string()
-// .replace("**", "*");
-//
-// let mut file = OpenOptions::new()
-// .write(true)
-// .truncate(true)
-// .create(true)
-// .open("src/ffi/cuda.rs")
-// .unwrap();
-//
-// let _ = file.write(s.as_bytes());
-//
