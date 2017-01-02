@@ -3,7 +3,7 @@
 
 mod ffi;
 
-// pub mod cuda;
+pub mod cuda;
 
 #[cfg(test)]
 mod tests {
