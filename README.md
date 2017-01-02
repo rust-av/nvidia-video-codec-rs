@@ -12,6 +12,8 @@ By default the headers are looked up on `/opt/cuda/include` and `/opt/nvidia-vid
 
 It is possible to override the search paths for the headers by setting the environment variables `CUDA_INCLUDE_PATH` and `NVIDIA_VIDEO_CODEC_INCLUDE_PATH`.
 
+A [convenience repackaging][3] of the cuvid and nvenc headers is available and known to work fine with the bindings.
+
 ## TODO
 
 - [ ] support cuda
@@ -27,3 +29,4 @@ It is possible to override the search paths for the headers by setting the envir
 
 [1]: https://github.com/servo/rust-bindgen
 [2]: https://developer.nvidia.com/nvidia-video-codec-sdk
+[3]: https://github.com/lu-zero/nvidia-video-codec
