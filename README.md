@@ -15,17 +15,19 @@ It is possible to override the search paths for the headers by setting the envir
 A [convenience repackaging][3] of the cuvid and nvenc headers is available and known to work fine with the bindings.
 
 ## TODO
+- [x] Simple bindings
+  - [x] cuda
+  - [x] cuvid
+  - [x] nvenc
 
-- [ ] support cuda
-  - [x] Simple bindings
-  - [ ] Safe abstraction
-- [ ] support cuvid
-  - [x] Simple bindings
-  - [ ] Safe abstraction
-- [ ] support nvenc
-  - [x] Simple bindings
-  - [ ] Safe abstraction
+- [ ] Safe abstraction
+  - [ ] support cuda
+  - [ ] support cuvid
+  - [ ] support nvenc
+
 - [ ] Examples
+  - [ ] simple decode
+  - [ ] simple encode
 
 [1]: https://github.com/servo/rust-bindgen
 [2]: https://developer.nvidia.com/nvidia-video-codec-sdk
