@@ -1,0 +1,14 @@
+[package]
+name = "nvidia-video-codec-sys"
+version = "0.1.0"
+authors = ["Luca Barbato <lu_zero@gentoo.org>"]
+license = "MIT"
+description = "FFI bindings to NVIDIA Video Codec"
+repository = "https://github.com/rust-av/nvidia-video-codec-rs"
+
+build = "build.rs"
+
+[build-dependencies.libbindgen]
+git = "https://github.com/servo/rust-bindgen"
+
+[dependencies]

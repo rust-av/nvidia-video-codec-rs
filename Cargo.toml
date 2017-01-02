@@ -2,10 +2,15 @@
 name = "nvidia-video-codec"
 version = "0.1.0"
 authors = ["Luca Barbato <lu_zero@gentoo.org>"]
-
-build = "build.rs"
-
-[build-dependencies.libbindgen]
-git = "https://github.com/servo/rust-bindgen"
+license = "MIT"
+description = "NVIDIA Video Codec bindings"
+repository = "https://github.com/rust-av/nvidia-video-codec-rs"
+readme = "../README.md"
+keywords = ["NVIDIA", "cuvid", "nvenc"]
 
 [dependencies]
+nvidia-video-codec-sys = { version = "0.1.0", path = "nvidia-video-codec-sys" }
+
+[workspace]
+members = ["nvidia-video-codec-sys"]
+

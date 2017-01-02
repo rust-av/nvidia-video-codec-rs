@@ -53,18 +53,18 @@ fn main() {
         .header(cuda_include.join("cuda.h").to_string_lossy());
 
     // Manually fix the comment so rustdoc won't try to pick them
-    format_write(cuda_builder, "src/ffi/cuda.rs");
+    format_write(cuda_builder, "src/cuda.rs");
 
     let cuvid_builder = common_builder()
         .clang_arg(format!("-I{}", nvc_include.to_string_lossy()))
         .clang_arg(format!("-I{}", cuda_include.to_string_lossy()))
         .header(nvc_include.join("nvcuvid.h").to_string_lossy());
 
-    format_write(cuvid_builder, "src/ffi/cuvid.rs");
+    format_write(cuvid_builder, "src/cuvid.rs");
 
     let nvenc_builder = common_builder()
         .clang_arg(format!("-I{}", nvc_include.to_string_lossy()))
         .header(nvc_include.join("nvEncodeAPI.h").to_string_lossy());
 
-    format_write(nvenc_builder, "src/ffi/nvenc.rs");
+    format_write(nvenc_builder, "src/nvenc.rs");
 }

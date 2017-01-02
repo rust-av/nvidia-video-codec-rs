@@ -4,7 +4,7 @@ use std::os::raw::c_char;
 use ffi::cuda::*;
 use ffi::cuda::cudaError_enum::*;
 
-struct CuDevice {
+pub struct CuDevice {
     device: CUdevice,
 }
 
