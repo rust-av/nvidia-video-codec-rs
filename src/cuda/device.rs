@@ -8,16 +8,6 @@ pub struct CuDevice {
     device: CUdevice,
 }
 
-macro_rules! wrap {
-    ($val:ident, $res:ident) => (
-        if $res == CUDA_SUCCESS {
-            Ok($val)
-        } else {
-            Err($res)
-        }
-    )
-}
-
 impl CuDevice {
     pub fn new(ordinal: c_int) -> Result<CuDevice, CUresult> {
         let mut d = CuDevice { device: 0 };
