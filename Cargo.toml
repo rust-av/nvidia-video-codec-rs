@@ -5,7 +5,7 @@ authors = ["Luca Barbato <lu_zero@gentoo.org>"]
 license = "MIT"
 description = "NVIDIA Video Codec bindings"
 repository = "https://github.com/rust-av/nvidia-video-codec-rs"
-readme = "../README.md"
+readme = "README.md"
 keywords = ["NVIDIA", "cuvid", "nvenc"]
 
 [dependencies]
